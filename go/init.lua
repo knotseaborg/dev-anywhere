@@ -22,24 +22,24 @@ require("lazy").setup({
     },
     config = function()
       require("go").setup()
+      require("lspconfig").gopls.setup({})
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = { 'lua', 'go', 'vimdoc', 'vim'}
+      })
     end,
     event = {"CmdlineEnter"},
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+},{
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.g.tokyonight_style = "storm"
+      vim.cmd("colorscheme tokyonight")
+    end,
+    lazy = false,
+    priority = 1000,
+    opts = {},
 })
-
-require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'lua', 'go'},  -- List of parsers to install
-    highlight = {
-        enable = true,  -- Enable Treesitter syntax highlighting
-    },
-    indent = {
-        enable = true,  -- Enable Treesitter-based indenting
-    },
-}
-
-require("lspconfig").gopls.setup({}) -- Setup and start lsp server
-require("go").setup() -- Setup and start go.nvim
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {

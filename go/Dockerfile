@@ -22,7 +22,7 @@ RUN curl -L https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \
     rm go${GO_VERSION}.linux-amd64.tar.gz
 
 # Set Go environment variables
-ENV GOPATH=/go
+ENV GOPATH=/projects
 ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Create a directory for Go projects
@@ -34,6 +34,3 @@ COPY init.lua /root/.config/nvim/
 
 # Set up a default working directory
 WORKDIR $GOPATH/src
-
-# Default command to run when the container starts
-CMD ["bash", "-c", "startup.sh"]
