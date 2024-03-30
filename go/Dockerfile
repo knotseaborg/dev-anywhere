@@ -29,8 +29,8 @@ ENV PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 RUN mkdir -p $GOPATH/src $GOPATH/bin
 
 # Add vim plugins
-RUN mkdir -p /root/.config/nvim
-COPY init.lua /root/.config/nvim/
-
+RUN mkdir -p /root/.config/nvim/lua
+COPY init.lua /root/.config/nvim/init.lua
+COPY lua /root/.config/nvim/lua
 # Set up a default working directory
 WORKDIR $GOPATH/src
